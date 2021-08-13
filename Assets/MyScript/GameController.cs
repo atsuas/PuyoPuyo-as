@@ -13,10 +13,10 @@ public class GameController : MonoBehaviour
     void Start()
     {
         fieldBlocks = new GameObject[6, 13];
-        //CreateBlocks();
-        BlockArray();
+        CreateBlocks();
+        //BlockArray();
         //Debug.Log(BlockConnect(1, 1, 0));
-        StartCoroutine(EraseBlocks());
+        //StartCoroutine(EraseBlocks());
     }
 
     void BlockArray()
@@ -83,7 +83,7 @@ public class GameController : MonoBehaviour
     //4個以上になったら消す
     IEnumerator EraseBlocks()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         for (int x = 0; x < 6; x++)
         {
             for (int y = 0; y < 13; y++)
@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         DropBlock();
     }
 
