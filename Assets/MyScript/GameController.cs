@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     public GameObject twinBlocks;
     GameObject currentBlocks;
     public GameObject[,] fieldBlocks;
+    List<GameObject> CheckFieldBlocks = new List<GameObject>();
     
     void Start()
     {
@@ -30,14 +31,32 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //繋がっているBlockを数える([1,1]の部分のみ)
     int BlockConnect(int x, int y, int blockConnect)
     {
-        //自分自身を数える
+        if (fieldBlocks[x, y] == null || CheckFieldBlocks.Contains(fieldBlocks[x, y]))
+        {
+            return blockConnect;
+        }
+        CheckFieldBlocks.Add(fieldBlocks[x, y]);
+
         blockConnect++;
-        //２つ右まで数える
-        if (fieldBlocks[x, y].name == fieldBlocks[x + 1, y].name)
+
+        if (x != 5 && fieldBlocks[x + 1, y] != null && fieldBlocks[x, y].name == fieldBlocks[x + 1, y].name)
         {
             blockConnect = BlockConnect(x + 1, y, blockConnect);
+        }
+        if (x != 0 && fieldBlocks[x - 1, y] != null && fieldBlocks[x, y].name == fieldBlocks[x - 1, y].name)
+        {
+            blockConnect = BlockConnect(x - 1, y, blockConnect);
+        }
+        if (y != 0 && fieldBlocks[x, y - 1] != null && fieldBlocks[x, y].name == fieldBlocks[x, y - 1].name)
+        {
+            blockConnect = BlockConnect(x, y - 1, blockConnect);
+        }
+        if (y != 12 && fieldBlocks[x, y + 1] != null && fieldBlocks[x, y].name == fieldBlocks[x, y + 1].name)
+        {
+            blockConnect = BlockConnect(x, y + 1, blockConnect);
         }
         return blockConnect;
     }
