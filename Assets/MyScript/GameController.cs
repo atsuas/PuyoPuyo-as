@@ -32,6 +32,28 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void DropBlock()
+    {
+        int nullCount = 0;
+        for (int x = 0; x < 6; x++)
+        {
+            for (int y = 0; y < 13; y++)
+            {
+                if (fieldBlocks[x,y] == null)
+                {
+                    nullCount++;
+                }
+                else if (nullCount > 0)
+                {
+                    fieldBlocks[x, y].transform.position += new Vector3(0, nullCount, 0);
+                    fieldBlocks[x, -nullCount] = fieldBlocks[x, y];
+                    fieldBlocks[x, y] = null;
+                }
+            }
+            nullCount = 0;
+        }
+    }
+
     //4個以上になったら消す
     IEnumerator EraseBlocks()
     {
@@ -47,6 +69,8 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+        yield return new WaitForSeconds(1.5f);
+        DropBlock();
     }
 
     //繋がっているBlockを数える([1,1]の部分のみ)
