@@ -13,17 +13,16 @@ public class GameController : MonoBehaviour
     {
         fieldBlocks = new GameObject[6, 13];
         //CreateBlocks();
-        StartCoroutine(Array());
+        BlockArray();
+        Debug.Log(BlockConnect(1, 1, 0));
     }
 
-    //コルーチンで確認
-    IEnumerator Array()
+    void BlockArray()
     {
         for (int x = 0; x < 6; x++)
         {
             for (int y = 0; y < 10; y++)
             {
-                yield return new WaitForSeconds(0.3f);
                 GameObject piece = Instantiate(blocks[Random.Range(0, 4)]);
                 piece.transform.position = new Vector3(x, y, 0);
                 fieldBlocks[x, y] = piece;
@@ -31,9 +30,16 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void Update()
+    int BlockConnect(int x, int y, int blockConnect)
     {
-        
+        //自分自身を数える
+        blockConnect++;
+        //右にあれば+1数える
+        if (fieldBlocks[x, y].name == fieldBlocks[x + 1, y].name)
+        {
+            blockConnect++;
+        }
+        return blockConnect;
     }
 
     public void CreateBlocks()
