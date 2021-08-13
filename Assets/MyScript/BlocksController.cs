@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class BlocksController : MonoBehaviour
 {
+    float thisTime;
     
     void Start()
     {
-        
+        //経過時間
+        thisTime = Time.time;
     }
 
     void Update()
@@ -21,6 +23,7 @@ public class BlocksController : MonoBehaviour
                 this.gameObject.transform.position += new Vector3(1, 0, 0);
             }
         }
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             this.gameObject.transform.position += new Vector3(1, 0, 0);
@@ -30,7 +33,8 @@ public class BlocksController : MonoBehaviour
                 this.gameObject.transform.position += new Vector3(-1, 0, 0);
             }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - thisTime > 0.8f)
         {
             this.gameObject.transform.position += new Vector3(0, -1, 0);
             //上に+1して動けなくする
@@ -46,7 +50,27 @@ public class BlocksController : MonoBehaviour
                 //オブジェクトのチェックを消す
                 this.enabled = false;
             }
+            thisTime = Time.time;
         }
+
+        //Blockを下に一気に落とす
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            while (CanMove())
+            {
+                this.gameObject.transform.position += new Vector3(0, -1, 0);
+            }
+            if (!CanMove())
+            {
+                this.gameObject.transform.position += new Vector3(0, 1, 0);
+                ChangeFieldBlocks();
+                this.gameObject.transform.DetachChildren();
+                FindObjectOfType<GameController>().DropBlock();
+                Destroy(this.gameObject, 10f);
+                this.enabled = false;
+            }
+        }
+
         //回転
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
