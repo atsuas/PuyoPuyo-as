@@ -7,9 +7,11 @@ public class GameController : MonoBehaviour
     public GameObject[] blocks;
     public GameObject twinBlocks;
     GameObject currentBlocks;
+    public GameObject[,] fieldBlocks;
     
     void Start()
     {
+        fieldBlocks = new GameObject[6, 13];
         CreateBlocks();
     }
 
@@ -18,7 +20,7 @@ public class GameController : MonoBehaviour
         
     }
 
-    void CreateBlocks()
+    public void CreateBlocks()
     {
         //親を取得して位置指定
         currentBlocks = Instantiate(twinBlocks);

@@ -37,6 +37,14 @@ public class BlocksController : MonoBehaviour
             if (!CanMove())
             {
                 this.gameObject.transform.position += new Vector3(0, 1, 0);
+                ChangeFieldBlocks();
+                //親子関係を解消して消す
+                this.gameObject.transform.DetachChildren();
+                //新しいブロックを作成する
+                FindObjectOfType<GameController>().CreateBlocks();
+                Destroy(this.gameObject, 10f);
+                //オブジェクトのチェックを消す
+                this.enabled = false;
             }
         }
         //回転
@@ -73,5 +81,15 @@ public class BlocksController : MonoBehaviour
             }
         }
         return true;
+    }
+
+    void ChangeFieldBlocks()
+    {
+        foreach (Transform childBlocks in transform)
+        {
+            int X = Mathf.RoundToInt(childBlocks.transform.position.x);
+            int Y = Mathf.RoundToInt(childBlocks.transform.position.y);
+            FindObjectOfType<GameController>().fieldBlocks[X, Y] = childBlocks.gameObject;
+        }
     }
 }
