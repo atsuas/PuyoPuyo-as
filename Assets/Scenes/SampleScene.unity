@@ -155,6 +155,8 @@ MonoBehaviour:
   - {fileID: 3481061523998742325, guid: 63bb1bb4fe290413bb143ad8618fbbe0, type: 3}
   - {fileID: 8282096992213846102, guid: 7160d619a4b3e4ab69ad19b08b07c0fe, type: 3}
   - {fileID: 7920973354311569575, guid: 6a1c68a08312c4a34aee7ca7ea04431a, type: 3}
+  twinBlocks: {fileID: 3326584588403518522, guid: 8591fbe15587e4e9ab5095a312e2952c,
+    type: 3}
 --- !u!4 &88349674
 Transform:
   m_ObjectHideFlags: 0
