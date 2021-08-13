@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlocksController : MonoBehaviour
 {
     float thisTime;
-    
+
     void Start()
     {
         //経過時間
