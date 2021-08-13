@@ -52,7 +52,32 @@ public class GameController : MonoBehaviour
             }
             nullCount = 0;
         }
-        StartCoroutine(EraseBlocks());
+
+        //繋がっていなかったらcreateする
+        if (ConnectSuccess())
+        {
+            StartCoroutine(EraseBlocks());
+        }
+        if (!ConnectSuccess())
+        {
+            CreateBlocks();
+        }
+    }
+
+    bool ConnectSuccess()
+    {
+        for (int x = 0; x < 6; x++)
+        {
+            for (int y = 0; y < 13; y++)
+            {
+                CheckFieldBlocks.Clear();
+                if (BlockConnect(x, y, 0) >= 4 && fieldBlocks[x, y] != null)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     //4個以上になったら消す
