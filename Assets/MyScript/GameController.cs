@@ -52,6 +52,7 @@ public class GameController : MonoBehaviour
             }
             nullCount = 0;
         }
+        StartCoroutine(EraseBlocks());
     }
 
     //4個以上になったら消す
