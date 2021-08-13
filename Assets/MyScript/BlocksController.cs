@@ -41,7 +41,7 @@ public class BlocksController : MonoBehaviour
                 //親子関係を解消して消す
                 this.gameObject.transform.DetachChildren();
                 //新しいブロックを作成する
-                FindObjectOfType<GameController>().CreateBlocks();
+                FindObjectOfType<GameController>().DropBlock();
                 Destroy(this.gameObject, 10f);
                 //オブジェクトのチェックを消す
                 this.enabled = false;

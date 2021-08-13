@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void DropBlock()
+    public void DropBlock()
     {
         int nullCount = 0;
         for (int x = 0; x < 6; x++)
