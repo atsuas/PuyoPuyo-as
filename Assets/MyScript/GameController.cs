@@ -32,12 +32,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //4個以上になったら消す
     void EraseBlocks()
     {
         for (int x = 0; x < 6; x++)
         {
             for (int y = 0; y < 13; y++)
             {
+                CheckFieldBlocks.Clear();
                 if (BlockConnect(x,y,0) >= 4 && fieldBlocks[x, y] != null)
                 {
                     Destroy(fieldBlocks[x, y]);
