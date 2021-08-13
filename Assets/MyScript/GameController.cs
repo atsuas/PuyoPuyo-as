@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
         //CreateBlocks();
         BlockArray();
         //Debug.Log(BlockConnect(1, 1, 0));
-        EraseBlocks();
+        StartCoroutine(EraseBlocks());
     }
 
     void BlockArray()
@@ -33,8 +33,9 @@ public class GameController : MonoBehaviour
     }
 
     //4個以上になったら消す
-    void EraseBlocks()
+    IEnumerator EraseBlocks()
     {
+        yield return new WaitForSeconds(1.5f);
         for (int x = 0; x < 6; x++)
         {
             for (int y = 0; y < 13; y++)
