@@ -45,8 +45,8 @@ public class GameController : MonoBehaviour
                 }
                 else if (nullCount > 0)
                 {
-                    fieldBlocks[x, y].transform.position += new Vector3(0, nullCount, 0);
-                    fieldBlocks[x, -nullCount] = fieldBlocks[x, y];
+                    fieldBlocks[x, y].transform.position += new Vector3(0, -nullCount, 0);
+                    fieldBlocks[x, y -nullCount] = fieldBlocks[x, y];
                     fieldBlocks[x, y] = null;
                 }
             }
