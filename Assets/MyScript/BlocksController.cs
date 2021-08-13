@@ -79,6 +79,11 @@ public class BlocksController : MonoBehaviour
             {
                 return false;
             }
+            //ブロックがあれば動けなくする
+            if (FindObjectOfType<GameController>().fieldBlocks[X, Y] != null)
+            {
+                return false;
+            }
         }
         return true;
     }
