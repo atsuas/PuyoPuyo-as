@@ -34,10 +34,10 @@ public class GameController : MonoBehaviour
     {
         //自分自身を数える
         blockConnect++;
-        //右にあれば+1数える
+        //２つ右まで数える
         if (fieldBlocks[x, y].name == fieldBlocks[x + 1, y].name)
         {
-            blockConnect++;
+            blockConnect = BlockConnect(x + 1, y, blockConnect);
         }
         return blockConnect;
     }
