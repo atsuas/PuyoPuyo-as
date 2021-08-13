@@ -15,7 +15,8 @@ public class GameController : MonoBehaviour
         fieldBlocks = new GameObject[6, 13];
         //CreateBlocks();
         BlockArray();
-        Debug.Log(BlockConnect(1, 1, 0));
+        //Debug.Log(BlockConnect(1, 1, 0));
+        EraseBlocks();
     }
 
     void BlockArray()
@@ -27,6 +28,20 @@ public class GameController : MonoBehaviour
                 GameObject piece = Instantiate(blocks[Random.Range(0, 4)]);
                 piece.transform.position = new Vector3(x, y, 0);
                 fieldBlocks[x, y] = piece;
+            }
+        }
+    }
+
+    void EraseBlocks()
+    {
+        for (int x = 0; x < 6; x++)
+        {
+            for (int y = 0; y < 13; y++)
+            {
+                if (BlockConnect(x,y,0) >= 4 && fieldBlocks[x, y] != null)
+                {
+                    Destroy(fieldBlocks[x, y]);
+                }
             }
         }
     }
