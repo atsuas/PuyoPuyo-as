@@ -28,6 +28,11 @@ public class BlocksController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             this.gameObject.transform.RotateAround(transform.position, new Vector3(0, 0, 1), 90);
+            //回転しても向きを同じにする
+            foreach (Transform childBlock in transform)
+            {
+                childBlock.transform.RotateAround(childBlock.transform.position, new Vector3(0, 0, 1), -90);
+            }
         }
     }
 }
