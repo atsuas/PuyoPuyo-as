@@ -12,7 +12,23 @@ public class GameController : MonoBehaviour
     void Start()
     {
         fieldBlocks = new GameObject[6, 13];
-        CreateBlocks();
+        //CreateBlocks();
+        StartCoroutine(Array());
+    }
+
+    //コルーチンで確認
+    IEnumerator Array()
+    {
+        for (int x = 0; x < 6; x++)
+        {
+            for (int y = 0; y < 10; y++)
+            {
+                yield return new WaitForSeconds(0.3f);
+                GameObject piece = Instantiate(blocks[Random.Range(0, 4)]);
+                piece.transform.position = new Vector3(x, y, 0);
+                fieldBlocks[x, y] = piece;
+            }
+        }
     }
 
     void Update()
